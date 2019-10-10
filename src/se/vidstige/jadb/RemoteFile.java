@@ -11,9 +11,14 @@ public class RemoteFile {
     public String getName() { throw new UnsupportedOperationException(); }
     public int getSize() { throw new UnsupportedOperationException(); }
     public int getLastModified() { throw new UnsupportedOperationException(); }
-    public boolean isDirectory() { throw new UnsupportedOperationException(); }
+    public int getMode() { throw new UnsupportedOperationException(); }
 
     public String getPath() { return path;}
+
+    public int getTypeBits()     { return getMode() & 0170000; }
+    public boolean isDirectory() { return getTypeBits() == 040000; }
+    public boolean isLink()      { return getTypeBits() == 0140000; }
+    public boolean isFile()      { return getTypeBits() == 0100000; }
 
     @Override
     public boolean equals(Object o) {

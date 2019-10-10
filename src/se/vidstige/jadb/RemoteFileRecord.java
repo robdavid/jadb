@@ -27,8 +27,4 @@ class RemoteFileRecord extends RemoteFile {
         return lastModified;
     }
 
-    @Override
-    public boolean isDirectory() {
-        return (mode & (1 << 14)) == (1 << 14);
-    }
 }
