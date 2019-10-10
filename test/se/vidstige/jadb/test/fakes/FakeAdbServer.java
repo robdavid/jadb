@@ -287,13 +287,13 @@ public class FakeAdbServer implements AdbResponder {
 
                 private final int size;
                 private final int modifyTime;
-                private final boolean dir;
+                private final int mode;
 
                 MockFileEntry(String path, int size, int modifyTime, boolean dir) {
                     super(path);
                     this.size = size;
                     this.modifyTime = modifyTime;
-                    this.dir = dir;
+                    this.mode = dir ? 040000 : 0;
                 }
 
                 public int getSize() {
@@ -304,8 +304,9 @@ public class FakeAdbServer implements AdbResponder {
                     return modifyTime;
                 }
 
-                public boolean isDirectory() {
-                    return dir;
+                @Override
+                public int getMode() {
+                    return mode;
                 }
 
             }

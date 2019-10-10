@@ -1,9 +1,6 @@
 package se.vidstige.jadb.test.unit;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 import se.vidstige.jadb.JadbConnection;
 import se.vidstige.jadb.JadbDevice;
 import se.vidstige.jadb.JadbException;
@@ -102,17 +99,21 @@ public class MockedTestCases {
         server.expectShell("serial-123", "ls -l").returns("total 0");
         JadbDevice device = connection.getDevices().get(0);
         device.executeShell("ls", "-l");
+        Thread.sleep(200);
     }
 
     @Test
-    public void testExecuteEnableTcpip() throws IOException, JadbException {
+    //@Ignore
+    public void testExecuteEnableTcpip() throws IOException, JadbException, InterruptedException {
         server.add("serial-123");
         server.expectTcpip("serial-123", 5555);
         JadbDevice device = connection.getDevices().get(0);
         device.enableAdbOverTCP();
+        Thread.sleep(200);
     }
 
     @Test
+    //@Ignore
     public void testExecuteShellQuotesWhitespace() throws Exception {
         server.add("serial-123");
         server.expectShell("serial-123", "ls 'space file'").returns("space file");
@@ -124,6 +125,7 @@ public class MockedTestCases {
         device.executeShell("echo", "tab\tstring");
         device.executeShell("echo", "newline1\nstring");
         device.executeShell("echo", "newline2\r\nstring");
+        Thread.sleep(200);
     }
 
     @Test

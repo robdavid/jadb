@@ -27,4 +27,7 @@ class RemoteFileRecord extends RemoteFile {
         return lastModified;
     }
 
+    @Override
+    public int getMode() { return mode; }
+
 }
